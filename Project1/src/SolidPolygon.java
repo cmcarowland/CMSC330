@@ -10,9 +10,6 @@ public class SolidPolygon extends Polygon_ {
 
     @Override
     public void drawPolygon(Graphics graphics, Polygon polygon) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'drawPolygon'");
-    }
-
-    
+        graphics.fillPolygon(polygon);
+    }    
 }

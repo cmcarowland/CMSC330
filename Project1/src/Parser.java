@@ -40,39 +40,49 @@ class Parser {
     // right_triangle -> RIGHT_TRIANGLE COLOR number_list AT number_list HEIGHT NUMBER WIDTH NUMBER ';'
     // rectangle -> RECTANGLE_ COLOR number_list AT number_list HEIGHT NUMBER WIDTH NUMBER ';'
 
-    private void parseImages(Scene scene, Token imageToken) throws LexicalError, SyntaxError, IOException {
-        int height, width, offset, radius;
+    private void parseImages(Scene scene, Token imageToken) 
+        throws LexicalError, SyntaxError, IOException {
+        
         verifyNextToken(Token.COLOR);
         int[] colors = getNumberList(3);
         Color color = new Color(colors[0], colors[1], colors[2]);
         verifyNextToken(Token.AT);
         int[] location = getNumberList(2);
         Point point = new Point(location[0], location[1]);
-        if (imageToken == Token.RIGHT_TRIANGLE) {
-            verifyNextToken(Token.HEIGHT);
-            verifyNextToken(Token.NUMBER);
-            height = lexer.getNumber();
-            verifyNextToken(Token.WIDTH);
-            verifyNextToken(Token.NUMBER);
-            width = lexer.getNumber();
-            RightTriangle triangle = new RightTriangle(color, point, height, width);
-            scene.addImage(triangle);
-        } else if (imageToken == Token.RECTANGLE) {
-            verifyNextToken(Token.HEIGHT);
-            verifyNextToken(Token.NUMBER);
-            height = lexer.getNumber();
-            verifyNextToken(Token.WIDTH);
-            verifyNextToken(Token.NUMBER);
-            width = lexer.getNumber();
-            Rectangle rectangle = new Rectangle(color, point, height, width);
-            scene.addImage(rectangle);
+
+        if (imageToken == Token.RIGHT_TRIANGLE || imageToken == Token.RECTANGLE) {
+            scene.addImage(parseHollowPolygon(color, point, imageToken));
+        } else if (imageToken == Token.ISOSCELES) {
+            scene.addImage(new IsoscelesTriangle(color, point, getHeight(), getWidth()));
         } else {
              throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken);
         }
+        
         verifyNextToken(Token.SEMICOLON);
         token = lexer.getNextToken();
         if (token != Token.END)
             parseImages(scene, token);
+    }
+
+    private int getHeight() throws LexicalError, SyntaxError, IOException {
+        verifyNextToken(Token.HEIGHT); 
+        verifyNextToken(Token.NUMBER);
+        return lexer.getNumber();
+    }
+
+    private int getWidth() throws LexicalError, SyntaxError, IOException {
+        verifyNextToken(Token.WIDTH); 
+        verifyNextToken(Token.NUMBER);
+        return lexer.getNumber();
+    }
+
+    private HollowPolygon parseHollowPolygon(Color color, Point point, Token token) 
+        throws LexicalError, SyntaxError, IOException {
+        if(token == Token.RIGHT_TRIANGLE) 
+            return new RightTriangle(color, point, getHeight(), getWidth());
+        else
+            return new Rectangle(color, point, getHeight(), getWidth());
+            
     }
 
     // Parses the following productions
