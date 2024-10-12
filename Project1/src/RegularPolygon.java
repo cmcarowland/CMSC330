@@ -1,8 +1,6 @@
-package com.project1;
 
 
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.*;
 
 public class RegularPolygon extends SolidPolygon {
 
