@@ -7,7 +7,11 @@ public class SolidPolygon extends Polygon_ {
         super(color, vertexCount);
     }
 
+    @Override
     public void drawPolygon(Graphics graphics, Polygon polygon) {
-        // Graphics.fillPolygon() 
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'drawPolygon'");
     }
+
+    
 }
