@@ -49,7 +49,7 @@ class Parser {
         verifyNextToken(Token.AT);
         int[] location = getNumberList(2);
         Point point = new Point(location[0], location[1]);
-        PolygonData pd = parseImageData();
+        PolygonData pd = PolygonData.PolygonDataBuilder(lexer);
 
         if (imageToken == Token.RIGHT_TRIANGLE || imageToken == Token.RECTANGLE) {
             scene.addImage(parseHollowPolygon(color, point, imageToken, pd));
@@ -62,53 +62,6 @@ class Parser {
         token = lexer.getNextToken();
         if (token != Token.END)
             parseImages(scene, token);
-    }
-
-    private PolygonData parseImageData () throws LexicalError, IOException, SyntaxError {
-        PolygonData pd = new PolygonData();
-        Token token;
-        while ((token = lexer.getNextToken()) != Token.SEMICOLON) {
-            switch(token) {
-                case HEIGHT:
-                    verifyNextToken(Token.NUMBER);
-                    pd.height = lexer.getNumber();
-                    pd.flags |= 1;
-                    break;
-                case WIDTH:
-                    verifyNextToken(Token.NUMBER);
-                    pd.width = lexer.getNumber();
-                    pd.flags |= 2;    
-                    break;
-                case LEFT_PAREN:
-                    int[] location = getNumberListInside(2);
-                    pd.position = new Point(location[0], location[1]); 
-                    pd.flags |= 4;  
-                    break;               
-                case OFFSET:
-                    verifyNextToken(Token.NUMBER);
-                    pd.offset = lexer.getNumber();
-                    pd.flags |= 8;
-                    break;
-                case SIDES:
-                    verifyNextToken(Token.NUMBER);
-                    pd.sides = lexer.getNumber();
-                    pd.flags |= 16;    
-                    break;
-                case RADIUS:
-                    verifyNextToken(Token.NUMBER);
-                    pd.radius = lexer.getNumber();
-                    pd.flags |= 32;    
-                    break;
-                case QUOTE:
-                    pd.flags |= 64;
-                    pd.text = lexer.getLexeme();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        return pd;
     }
 
     private HollowPolygon parseHollowPolygon(Color color, Point point, Token token, PolygonData pd) 
@@ -126,7 +79,6 @@ class Parser {
     // numbers -> NUMBER | NUMBER ',' numbers
 
     // Returns an array of the numbers in the number list
-
     private int[]  getNumberList(int count) throws LexicalError, SyntaxError, IOException {
         int[] list = new int[count];
         verifyNextToken(Token.LEFT_PAREN);
@@ -142,47 +94,13 @@ class Parser {
         return list;
     }
 
-    // Returns a list of numbers
-
-    private int[] getNumberList() throws LexicalError, SyntaxError, IOException {
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        verifyNextToken(Token.LEFT_PAREN);
-        do {
-            verifyNextToken(Token.NUMBER);
-            list.add((int) lexer.getNumber());
-            token = lexer.getNextToken();
-        }
-        while (token == Token.COMMA);
-        verifyCurrentToken(Token.RIGHT_PAREN);
-        int[] values = new int[list.size()];
-        for (int i = 0; i < values.length; i++)
-            values[i] = list.get(i);
-        return values;
-    }
-
-    private int[] getNumberListInside(int count) throws LexicalError, SyntaxError, IOException {
-        int[] list = new int[count];
-        for (int i = 0; i < count; i++) {
-            verifyNextToken(Token.NUMBER);
-            list[i] = lexer.getNumber();
-            token = lexer.getNextToken();
-            if (i < count - 1)
-                verifyCurrentToken(Token.COMMA);
-            else
-                verifyCurrentToken(Token.RIGHT_PAREN);
-        }
-        return list;
-    }
-
     // Verifies that the next token is the expected token
-
     private void verifyNextToken(Token expectedToken) throws LexicalError, SyntaxError, IOException {
         token = lexer.getNextToken();
         verifyCurrentToken(expectedToken);
     }
 
     // Verifies that the current token is the expected token
-
     private void verifyCurrentToken(Token expectedToken) throws SyntaxError {
         if (token != expectedToken)
             throw new SyntaxError(lexer.getLineNo(), "Expecting token " + expectedToken + " not " + token);
