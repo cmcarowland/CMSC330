@@ -1,15 +1,20 @@
-
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Provides a parser for constructing graphical scenes from input files.
+ * It utilizes a lexer to interpret tokens and supports parsing of scenes, 
+ * images, and various polygon types. Includes methods for verifying 
+ * tokens and extracting numerical lists, ensuring proper syntax throughout. 
+*/
 
 import java.awt.*;
 import java.io.*;
-import java.util.*;
-import javax.swing.*;
 
 // This class provides the skeleton parser for project 1
 
 class Parser {
-    private JFrame window;
     private Token token;
     private Lexer lexer;
 
@@ -51,16 +56,18 @@ class Parser {
         Point point = new Point(location[0], location[1]);
         PolygonData pd = PolygonData.PolygonDataBuilder(lexer);
 
-        if (imageToken == Token.RIGHT_TRIANGLE || imageToken == Token.RECTANGLE) {
+        if (pd.flags == 3 && (imageToken == Token.RIGHT_TRIANGLE || imageToken == Token.RECTANGLE)) {
             scene.addImage(parseHollowPolygon(color, point, imageToken, pd));
-        } else if (imageToken == Token.ISOSCELES) {
+        } else if (pd.flags == 3 && (imageToken == Token.ISOSCELES)) {
             scene.addImage(new IsoscelesTriangle(color, point, pd.height, pd.width));
-        } else if (imageToken == Token.PARALLELOGRAM) {
+        } else if (pd.flags == 12 && (imageToken == Token.PARALLELOGRAM)) {
             scene.addImage(new Parallelogram(color, point, pd.position, pd.offset));
-        } else if (imageToken == Token.REGULARPOLYGON) {
+        } else if (pd.flags == 48 && (imageToken == Token.REGULARPOLYGON)) {
             scene.addImage(new RegularPolygon(color, point, pd.sides, pd.radius));
+        } else if (pd.flags == 64 && (imageToken == Token.TEXT)) {
+            scene.addImage(new Text(color, point, pd.text));
         } else {
-            //throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken);
+            throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken + " PolygonFlags : " + pd.flags);
         }
 
         token = lexer.getNextToken();
