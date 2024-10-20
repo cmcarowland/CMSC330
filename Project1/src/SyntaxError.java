@@ -1,5 +1,7 @@
-
-
+// CMSC 330 Advanced Programming Languages
+// Project 1 Skeleton
+// UMGC CITE
+// August 2021
 
 // Class that defines a syntax error
 
