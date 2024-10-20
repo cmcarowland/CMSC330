@@ -8,8 +8,8 @@ import java.io.*;
 class Lexer {
 
     private StreamTokenizer tokenizer;
-    private String punctuation = ",;.()";
-    private Token[] punctuationTokens = {Token.COMMA, Token.SEMICOLON, Token.PERIOD, Token.LEFT_PAREN, Token.RIGHT_PAREN };
+    private String punctuation = ",;.()\"";
+    private Token[] punctuationTokens = {Token.COMMA, Token.SEMICOLON, Token.PERIOD, Token.LEFT_PAREN, Token.RIGHT_PAREN, Token.QUOTE };
 
     // Constructor that creates a lexical analyzer object given the source file
 
