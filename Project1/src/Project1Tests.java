@@ -1,4 +1,12 @@
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Unit tests for validating the parsing of scene files in the project.
+ * Each test attempts to parse a specific scene file and asserts that 
+ * the parsing succeeds, checking various polygon types and text elements.
+*/
 
 import static org.junit.Assert.assertEquals;
 

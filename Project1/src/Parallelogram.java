@@ -1,4 +1,13 @@
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Represents a parallelogram as a solid polygon.
+ * Inherits from SolidPolygon and initializes the vertices 
+ * based on the specified upper-left and lower-right points 
+ * and an offset for the x-coordinates.
+*/
 
 import java.awt.*;
 

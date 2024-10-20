@@ -1,3 +1,14 @@
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Class representing data for polygon attributes, including height, width, 
+ * position, offset, sides, radius, and text. It includes a builder method 
+ * to parse and populate these attributes from a lexer, handling token verification 
+ * and flag setting to track which attributes have been defined. 
+*/
+
 import java.awt.Point;
 import java.io.IOException;
 

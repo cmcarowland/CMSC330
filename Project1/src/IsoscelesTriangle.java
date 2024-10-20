@@ -1,6 +1,12 @@
-
-
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ * 
+ * Represents an isosceles triangle as a solid polygon.
+ * Inherits from SolidPolygon and initializes the triangle's vertices
+ * based on the provided location, height, and width.
+ */
 
 import java.awt.*;
 

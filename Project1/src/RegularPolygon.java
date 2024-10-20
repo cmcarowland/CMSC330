@@ -1,4 +1,13 @@
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Represents a regular polygon as a solid polygon.
+ * Inherits from SolidPolygon and calculates the vertices 
+ * based on the specified position, number of sides, and radius, 
+ * ensuring that the polygon is evenly shaped.
+*/
 
 import java.awt.*;
 

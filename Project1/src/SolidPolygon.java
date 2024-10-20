@@ -1,4 +1,13 @@
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Base class for solid polygons that extends the Polygon_ class.
+ * It initializes the polygon with a specified color and vertex count,
+ * and overrides the drawPolygon method to fill the polygon using 
+ * the provided Graphics context.  
+*/
 
 import java.awt.*;
 

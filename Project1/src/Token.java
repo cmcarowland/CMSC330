@@ -1,5 +1,13 @@
-
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Enum representing various tokens used in lexical analysis.
+ * Each token corresponds to a specific keyword, symbol, or 
+ * identifier recognized by the lexer, facilitating tokenization 
+ * of the input data. 
+*/
 
 // Enumerated type that defines the list of tokens
 

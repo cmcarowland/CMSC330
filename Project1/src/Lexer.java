@@ -1,4 +1,14 @@
-
+/**
+ * Raymond Rowland
+ * Project 1
+ * 20 OCT 24
+ *
+ * Lexical analyzer class for processing input from a source file.
+ * It utilizes a StreamTokenizer to identify and return tokens, 
+ * handling numbers, words, punctuation, and end-of-file signals.
+ * Utilizes a custom PolygonData class to parse and validate 
+ * parameters associated with various polygons.
+*/
 
 
 import java.io.*;
