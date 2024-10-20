@@ -1,0 +1,4 @@
+Scene FilledIsosceles (500, 500)
+    Rectangle Color (0, 128, 255) at (100, 100) Width 100;
+    Isosceles Color (255, 0, 0) at (120, 120) Height 100 Width 200; 
+End.

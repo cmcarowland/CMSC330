@@ -19,7 +19,7 @@ public class Project1Tests {
         try {
             File sceneFile = new File(sceneFileName);
             Parser parser = new Parser(sceneFile);
-            Scene scene = parser.parseScene();
+            parser.parseScene();
         } catch (SyntaxError error) {
             return false;
         } catch (LexicalError error) {
@@ -54,5 +54,30 @@ public class Project1Tests {
     @Test
     public void TestText() {
         assertEquals(true, AttemptParse("/Volumes/Hard Drive/Documents/College/CMSC330/Project1/scene_text.txt"));
+    }
+
+    @Test
+    public void TestStandardInvalid() {
+        assertEquals(false, AttemptParse("/Volumes/Hard Drive/Documents/College/CMSC330/Project1/sceneBad.txt"));
+    }
+
+    @Test
+    public void TestIsoBad() {
+        assertEquals(false, AttemptParse("/Volumes/Hard Drive/Documents/College/CMSC330/Project1/scene_isoBad.txt"));
+    }
+    
+    @Test
+    public void TestParallogramBad() {
+        assertEquals(false, AttemptParse("/Volumes/Hard Drive/Documents/College/CMSC330/Project1/scene_paraBad.txt"));
+    }
+
+    @Test
+    public void TestRegularBad() {
+        assertEquals(false, AttemptParse("/Volumes/Hard Drive/Documents/College/CMSC330/Project1/scene_regularBad.txt"));
+    }
+
+    @Test
+    public void TestTextBad() {
+        assertEquals(false, AttemptParse("/Volumes/Hard Drive/Documents/College/CMSC330/Project1/scene_textBad.txt"));
     }
 }
