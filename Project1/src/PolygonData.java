@@ -34,36 +34,50 @@ public class PolygonData {
         while ((token = lexer.getNextToken()) != Token.SEMICOLON) {
             switch(token) {
                 case HEIGHT:
+                    if((pd.flags & PolygonFlags.HEIGHT.flag()) != 0)
+                        throw new SyntaxError(lexer.getLineNo(), "Height Flag Previously Defined");
                     verifyNextToken(Token.NUMBER);
                     pd.height = lexer.getNumber();
                     pd.flags |= PolygonFlags.HEIGHT.flag();
                     break;
                 case WIDTH:
+                    if((pd.flags & PolygonFlags.WIDTH.flag()) != 0)
+                        throw new SyntaxError(lexer.getLineNo(), "Width Flag Previously Defined");
                     verifyNextToken(Token.NUMBER);
                     pd.width = lexer.getNumber();
                     pd.flags |= PolygonFlags.WIDTH.flag();    
                     break;
                 case LEFT_PAREN:
+                    if((pd.flags & PolygonFlags.POINT.flag()) != 0)
+                        throw new SyntaxError(lexer.getLineNo(), "Position Flag Previously Defined");
                     int[] location = getNumberListInside(2);
                     pd.position = new Point(location[0], location[1]); 
                     pd.flags |= PolygonFlags.POINT.flag();  
                     break;               
                 case OFFSET:
+                    if((pd.flags & PolygonFlags.OFFSET.flag()) != 0)
+                        throw new SyntaxError(lexer.getLineNo(), "Offset Flag Previously Defined");
                     verifyNextToken(Token.NUMBER);
                     pd.offset = lexer.getNumber();
                     pd.flags |= PolygonFlags.OFFSET.flag();
                     break;
                 case SIDES:
+                    if((pd.flags & PolygonFlags.SIDES.flag()) != 0)
+                        throw new SyntaxError(lexer.getLineNo(), "Side Flag Previously Defined"); 
                     verifyNextToken(Token.NUMBER);
                     pd.sides = lexer.getNumber();
                     pd.flags |= PolygonFlags.SIDES.flag();    
                     break;
                 case RADIUS:
+                    if((pd.flags & PolygonFlags.RADIUS.flag()) != 0)
+                        throw new SyntaxError(lexer.getLineNo(), "Radius Flag Previously Defined");
                     verifyNextToken(Token.NUMBER);
                     pd.radius = lexer.getNumber();
                     pd.flags |= PolygonFlags.RADIUS.flag();    
                     break;
                 case QUOTE:
+                    if((pd.flags & PolygonFlags.TEXT.flag()) != 0)
+                        throw new SyntaxError(lexer.getLineNo(), "Text Flag Previously Defined");
                     pd.flags |= PolygonFlags.TEXT.flag();
                     pd.text = lexer.getLexeme();
                     break;
