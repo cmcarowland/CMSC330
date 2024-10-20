@@ -49,39 +49,74 @@ class Parser {
         verifyNextToken(Token.AT);
         int[] location = getNumberList(2);
         Point point = new Point(location[0], location[1]);
+        PolygonData pd = parseImageData();
 
         if (imageToken == Token.RIGHT_TRIANGLE || imageToken == Token.RECTANGLE) {
-            scene.addImage(parseHollowPolygon(color, point, imageToken));
+            scene.addImage(parseHollowPolygon(color, point, imageToken, pd));
         } else if (imageToken == Token.ISOSCELES) {
-            scene.addImage(new IsoscelesTriangle(color, point, getHeight(), getWidth()));
+            scene.addImage(new IsoscelesTriangle(color, point, pd.height, pd.width));
         } else {
-             throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken);
+            //throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken);
         }
-        
-        verifyNextToken(Token.SEMICOLON);
+
         token = lexer.getNextToken();
         if (token != Token.END)
             parseImages(scene, token);
     }
 
-    private int getHeight() throws LexicalError, SyntaxError, IOException {
-        verifyNextToken(Token.HEIGHT); 
-        verifyNextToken(Token.NUMBER);
-        return lexer.getNumber();
+    private PolygonData parseImageData () throws LexicalError, IOException, SyntaxError {
+        PolygonData pd = new PolygonData();
+        Token token;
+        while ((token = lexer.getNextToken()) != Token.SEMICOLON) {
+            switch(token) {
+                case HEIGHT:
+                    verifyNextToken(Token.NUMBER);
+                    pd.height = lexer.getNumber();
+                    pd.flags |= 1;
+                    break;
+                case WIDTH:
+                    verifyNextToken(Token.NUMBER);
+                    pd.width = lexer.getNumber();
+                    pd.flags |= 2;    
+                    break;
+                case LEFT_PAREN:
+                    int[] location = getNumberListInside(2);
+                    pd.position = new Point(location[0], location[1]); 
+                    pd.flags |= 4;  
+                    break;               
+                case OFFSET:
+                    verifyNextToken(Token.NUMBER);
+                    pd.offset = lexer.getNumber();
+                    pd.flags |= 8;
+                    break;
+                case SIDES:
+                    verifyNextToken(Token.NUMBER);
+                    pd.sides = lexer.getNumber();
+                    pd.flags |= 16;    
+                    break;
+                case RADIUS:
+                    verifyNextToken(Token.NUMBER);
+                    pd.radius = lexer.getNumber();
+                    pd.flags |= 32;    
+                    break;
+                case QUOTE:
+                    pd.flags |= 64;
+                    pd.text = lexer.getLexeme();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return pd;
     }
 
-    private int getWidth() throws LexicalError, SyntaxError, IOException {
-        verifyNextToken(Token.WIDTH); 
-        verifyNextToken(Token.NUMBER);
-        return lexer.getNumber();
-    }
-
-    private HollowPolygon parseHollowPolygon(Color color, Point point, Token token) 
+    private HollowPolygon parseHollowPolygon(Color color, Point point, Token token, PolygonData pd) 
         throws LexicalError, SyntaxError, IOException {
         if(token == Token.RIGHT_TRIANGLE) 
-            return new RightTriangle(color, point, getHeight(), getWidth());
+            return new RightTriangle(color, point, pd.height, pd.width);
         else
-            return new Rectangle(color, point, getHeight(), getWidth());
+            return new Rectangle(color, point, pd.height, pd.width);
             
     }
 
@@ -123,6 +158,20 @@ class Parser {
         for (int i = 0; i < values.length; i++)
             values[i] = list.get(i);
         return values;
+    }
+
+    private int[] getNumberListInside(int count) throws LexicalError, SyntaxError, IOException {
+        int[] list = new int[count];
+        for (int i = 0; i < count; i++) {
+            verifyNextToken(Token.NUMBER);
+            list[i] = lexer.getNumber();
+            token = lexer.getNextToken();
+            if (i < count - 1)
+                verifyCurrentToken(Token.COMMA);
+            else
+                verifyCurrentToken(Token.RIGHT_PAREN);
+        }
+        return list;
     }
 
     // Verifies that the next token is the expected token
