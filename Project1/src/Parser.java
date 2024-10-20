@@ -55,6 +55,8 @@ class Parser {
             scene.addImage(parseHollowPolygon(color, point, imageToken, pd));
         } else if (imageToken == Token.ISOSCELES) {
             scene.addImage(new IsoscelesTriangle(color, point, pd.height, pd.width));
+        } else if (imageToken == Token.PARALLELOGRAM) {
+            scene.addImage(new Parallelogram(color, point, pd.position, pd.offset));
         } else {
             //throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken);
         }
