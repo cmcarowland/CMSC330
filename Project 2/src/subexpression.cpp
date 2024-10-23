@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <cmath>
 using namespace std;
 
 #include "expression.h"
@@ -16,6 +17,13 @@ using namespace std;
 #include "operand.h"
 #include "plus.h"
 #include "minus.h"
+#include "multiply.h"
+#include "divide.h"
+#include "mod.h"
+#include "min.h"
+#include "max.h"
+#include "exponent.h"
+#include "invalid_operator.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right) {
     this->left = left;
@@ -36,7 +44,22 @@ Expression* SubExpression::parse(stringstream& in) {
             return new Plus(left, right);
         case '-':
             return new Minus(left, right);
+        case '*':
+            return new Multiply(left, right);
+        case '/':
+            return new Divide(left, right);
+        case '%':
+            return new Mod(left, right);
+        case '^':
+            return new Exponent(left, right);
+        case '<':
+            return new Min(left, right);
+        case '>':
+            return new Max(left, right);
     }
-    return 0;
+
+    stringstream ss;
+    ss << operation << " is not supported yet";
+    throw InvalidOperatorException(ss.str().c_str());
 }
         
