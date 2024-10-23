@@ -1,3 +1,7 @@
+.PHONY : all clean
 
-all:
-	gcc src/*.cpp -o Project2.exe
+all: 
+	g++ src/*.cpp -o bin/Project2.exe
+
+clean:
+	rm bin/*.exe
