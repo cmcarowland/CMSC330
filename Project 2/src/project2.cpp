@@ -18,6 +18,7 @@ using namespace std;
 #include "subexpression.h"
 #include "symboltable.h"
 #include "parse.h"
+#include "invalid_operator.h"
 
 SymbolTable symbolTable;
 
@@ -35,6 +36,7 @@ int main() {
 		system("pause");
 		return 1;
 	}
+
 	while (true) {
         fin.getline(line, SIZE);
 		if (!fin)
@@ -48,11 +50,12 @@ int main() {
 			parseAssignments(in);
 			double result = expression->evaluate();
 			cout << "Value = " << result << endl;
-		}
-		catch (string message) {
-			cout << message << endl;
-		}
+		} catch(const InvalidOperatorException& e) {
+			cout << e.what() << endl;
+			return -1;
+    	}
 	}
+
 	system("pause");
 	return 0;
 }
@@ -61,11 +64,11 @@ void parseAssignments(stringstream& in) {
 	char assignop, delimiter;
     string variable;
     int value;
+
     do {
         variable = parseName(in);
         in >> ws >> assignop >> value >> delimiter;
         symbolTable.insert(variable, value);
-    }
-    while (delimiter == ',');
+    } while (delimiter == ',');
 }
    
