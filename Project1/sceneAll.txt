@@ -1,0 +1,17 @@
+Scene Polygons (500, 500)
+    RightTriangle Color (255, 0, 0) at (120, 10) Height 100 Width 300; 
+    RightTriangle Color (0, 128, 0) at (420, 110) Height -100 Width -300; 
+    Rectangle Color (0, 128, 255) at (10, 0) Height 200 Width 100; 
+    Isosceles Color (128, 0, 0) at (220, 110) Height 100 Width 200; 
+    Parallelogram Color (0, 128, 255) at (380, 120) (460, 220) Offset 30; 
+    Text Color(0, 0, 0) at (20, 100) "Rectangle";
+    Text Color(0, 0, 0) at (175, 55) "Overlapping Right Triangles";
+    Text Color(255, 255, 255) at (380, 180) "Parallelogram";
+    Text Color(255, 255, 255) at (160, 200) "Isosceles Triangle";
+    Text Color(0, 0, 0) at (200, 260) "A Low Poly Flower?";
+    RegularPolygon Color(240, 225, 0) at (250, 350) Sides 8 Radius 80; 
+    RegularPolygon Color(225, 211, 0) at (250, 350) Sides 6 Radius 70; 
+    RegularPolygon Color(0, 211, 225) at (250, 350) Sides 5 Radius 60; 
+    RegularPolygon Color(0, 128, 150) at (250, 350) Sides 6 Radius 45; 
+    RegularPolygon Color(100, 60, 0) at (250, 350) Sides 10 Radius 20; 
+End.
