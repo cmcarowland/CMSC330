@@ -21,7 +21,7 @@ assignment → variable '=' literal
     - [x] Add ^ for exponents
     - [x] Add < to return min
     - [x] Add > to return max
-    - [ ] Add & to return avg
+    - [x] Add & to return avg
     - [ ] Add ~ as a postfix urinary operator
     - [ ] Add ? ternary operator
         - [ ] ex ? exTrue exFalse  

@@ -24,6 +24,7 @@ using namespace std;
 #include "max.h"
 #include "exponent.h"
 #include "invalid_operator.h"
+#include "avg.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right) {
     this->left = left;
@@ -56,6 +57,8 @@ Expression* SubExpression::parse(stringstream& in) {
             return new Min(left, right);
         case '>':
             return new Max(left, right);
+        case '&':
+            return new Avg(left, right);
     }
 
     stringstream ss;
