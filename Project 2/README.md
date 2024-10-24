@@ -22,7 +22,7 @@ assignment → variable '=' literal
     - [x] Add < to return min
     - [x] Add > to return max
     - [x] Add & to return avg
-    - [ ] Add ~ as a postfix urinary operator
+    - [x] Add ~ as a postfix urinary operator
     - [ ] Add ? ternary operator
         - [ ] ex ? exTrue exFalse  
     - [ ] Add #

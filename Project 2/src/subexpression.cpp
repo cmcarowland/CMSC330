@@ -42,6 +42,7 @@ Expression* SubExpression::parse(stringstream& in) {
     in >> operation;
     right = Operand::parse(in);
     in >> paren;
+
     switch (operation) {
         case '+':
             return new Plus(left, right);
@@ -62,7 +63,7 @@ Expression* SubExpression::parse(stringstream& in) {
         case '&':
             return new Avg(left, right);
         case '~':
-            return new Invert(left, nullptr);
+            return new Invert(left, right);
     }
 
     stringstream ss;
