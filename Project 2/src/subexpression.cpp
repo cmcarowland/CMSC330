@@ -12,9 +12,11 @@
 #include <cmath>
 using namespace std;
 
+#include "invalid_operator.h"
 #include "expression.h"
 #include "subexpression.h"
 #include "operand.h"
+
 #include "plus.h"
 #include "minus.h"
 #include "multiply.h"
@@ -23,8 +25,8 @@ using namespace std;
 #include "min.h"
 #include "max.h"
 #include "exponent.h"
-#include "invalid_operator.h"
 #include "avg.h"
+#include "invert.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right) {
     this->left = left;
@@ -59,6 +61,8 @@ Expression* SubExpression::parse(stringstream& in) {
             return new Max(left, right);
         case '&':
             return new Avg(left, right);
+        case '~':
+            return new Invert(left, nullptr);
     }
 
     stringstream ss;
