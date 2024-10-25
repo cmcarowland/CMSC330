@@ -27,6 +27,7 @@ using namespace std;
 #include "exponent.h"
 #include "avg.h"
 #include "invert.h"
+#include "ternary.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right) {
     this->left = left;
@@ -46,7 +47,6 @@ Expression* SubExpression::parse(stringstream& in) {
     left = Operand::parse(in);
     in >> operation;
     in >> ws;
-    cout << endl;
     while(in.peek() != ')'){
         right.push_back(Operand::parse(in));
         in >> ws;
@@ -74,6 +74,8 @@ Expression* SubExpression::parse(stringstream& in) {
             return new Avg(left, right);
         case '~':
             return new Invert(left, right);
+        case '?':
+            return new Ternary(left, right);
     }
 
     stringstream ss;

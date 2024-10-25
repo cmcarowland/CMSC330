@@ -24,7 +24,7 @@ assignment → variable '=' literal
     - [x] Add & to return avg
     - [x] Add ~ as a postfix urinary operator
     - [ ] Add ? ternary operator
-        - [ ] ex ? exTrue exFalse  
+        - [x] ex ? exTrue exFalse  
     - [ ] Add #
         - expression #
         - < 0 expression
