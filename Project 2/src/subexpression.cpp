@@ -17,17 +17,7 @@ using namespace std;
 #include "subexpression.h"
 #include "operand.h"
 
-#include "plus.h"
-#include "minus.h"
-#include "multiply.h"
-#include "divide.h"
-#include "mod.h"
-#include "min.h"
-#include "max.h"
-#include "exponent.h"
-#include "avg.h"
-#include "invert.h"
-#include "ternary.h"
+#include "subexpressions.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right) {
     this->left = left;
@@ -76,6 +66,8 @@ Expression* SubExpression::parse(stringstream& in) {
             return new Invert(left, right);
         case '?':
             return new Ternary(left, right);
+        case '#':
+            return new Quaternary(left, right);
     }
 
     stringstream ss;

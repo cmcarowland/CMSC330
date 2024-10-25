@@ -25,7 +25,7 @@ assignment → variable '=' literal
     - [x] Add ~ as a postfix urinary operator
     - [ ] Add ? ternary operator
         - [x] ex ? exTrue exFalse  
-    - [ ] Add #
+    - [x] Add #
         - expression #
         - < 0 expression
         - == 0 expression
