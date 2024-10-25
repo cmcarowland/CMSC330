@@ -30,17 +30,27 @@ using namespace std;
 
 SubExpression::SubExpression(Expression* left, Expression* right) {
     this->left = left;
+    this->right = vector<Expression*>{right};
+}
+
+SubExpression::SubExpression(Expression* left, vector<Expression*>& right) {
+    this->left = left;
     this->right = right;
 }
 
 Expression* SubExpression::parse(stringstream& in) {
     Expression* left;
-    Expression* right;
+    vector<Expression*> right;
     char operation, paren;
     
     left = Operand::parse(in);
     in >> operation;
-    right = Operand::parse(in);
+    in >> ws;
+    cout << endl;
+    while(in.peek() != ')'){
+        right.push_back(Operand::parse(in));
+        in >> ws;
+    }
     in >> paren;
 
     switch (operation) {
