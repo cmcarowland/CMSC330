@@ -18,7 +18,7 @@ string parseName(stringstream& in) {
     string name = "";
 
     in >> ws;
-    while (isalnum(in.peek())) {
+    while (isalnum(in.peek()) || (name.length() > 0 && in.peek() == '_')) {
         in >> alnum;
         name += alnum;
     }

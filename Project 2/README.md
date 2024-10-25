@@ -14,7 +14,7 @@ assignments → assignments ',' assignment | assignment
 assignment → variable '=' literal
 ```
 
-- [ ] Task 1
+- [x] Task 1
     - [x] Add * for multiplication
     - [x] Add / for division
     - [x] Add % for remainder
@@ -32,7 +32,7 @@ assignment → variable '=' literal
         - \> 0 expression
 
 - [ ] Task 2
-    - [ ] Modify the variable token so that underscores are premitted after the first character
+    - [x] Modify the variable token so that underscores are premitted after the first character
     - [ ] Assignments should be able to accept floats rather than only ints
 
 - [ ] Task 3 
