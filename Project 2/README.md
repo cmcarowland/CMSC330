@@ -23,7 +23,7 @@ assignment → variable '=' literal
     - [x] Add > to return max
     - [x] Add & to return avg
     - [x] Add ~ as a postfix urinary operator
-    - [ ] Add ? ternary operator
+    - [x] Add ? ternary operator
         - [x] ex ? exTrue exFalse  
     - [x] Add #
         - expression #
@@ -31,11 +31,11 @@ assignment → variable '=' literal
         - == 0 expression
         - \> 0 expression
 
-- [ ] Task 2
+- [x] Task 2
     - [x] Modify the variable token so that underscores are premitted after the first character
-    - [ ] Assignments should be able to accept floats rather than only ints
+    - [x] Assignments and literals should be able to accept floats rather than only ints
 
 - [ ] Task 3 
-    - [ ] The symbol table should be initialized before each statement is evaluated
+    - [x] The symbol table should be initialized before each statement is evaluated
     - [ ] Statements with uninitialized variables should be reported as an error. UninitException
-    - [ ] Double assignments should result in an error. AlreadyAssignedException
+    - [x] Double assignments should result in an error. AlreadyAssignedException

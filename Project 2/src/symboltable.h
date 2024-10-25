@@ -6,12 +6,19 @@
 // This file contains the class definition of the SymbolTable class. The symbol table is represented
 // with a vector (list) of type Symbol which is a pair consisting of a variable and its associated value.
 // The body of its functions are defined in symboltable.cpp. 
+#include <string>
+#include <vector>
+#include <sstream>
+using namespace std;
+
+#include "double_defined.h"
 
 class SymbolTable {
 public:
     SymbolTable() {}
     void insert(string variable, double value);
     double lookUp(string variable) const;
+    void clear();
 private:
     struct Symbol {
         Symbol(string variable, double value) {
