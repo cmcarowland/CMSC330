@@ -35,7 +35,7 @@ assignment → variable '=' literal
     - [x] Modify the variable token so that underscores are premitted after the first character
     - [x] Assignments and literals should be able to accept floats rather than only ints
 
-- [ ] Task 3 
+- [x] Task 3 
     - [x] The symbol table should be initialized before each statement is evaluated
-    - [ ] Statements with uninitialized variables should be reported as an error. UninitException
+    - [x] Statements with uninitialized variables should be reported as an error. UninitException
     - [x] Double assignments should result in an error. AlreadyAssignedException

@@ -10,8 +10,7 @@
 #include "symboltable.h"
 
 void SymbolTable::insert(string variable, double value) {
-    double element = -1;
-    if(lookUp(variable) != -1) {
+    if(hasSymbol(variable)) {
         stringstream ss;
         ss << variable << " Was previously defined"; 
         throw DoubleDefinedException(ss.str().c_str());
@@ -21,12 +20,22 @@ void SymbolTable::insert(string variable, double value) {
     elements.push_back(symbol);
 }
 
+bool SymbolTable::hasSymbol(string variable) {
+    for (int i = 0; i < elements.size(); i++)
+        if (elements[i].variable == variable)
+             return true;
+
+    return false;
+}
+
 double SymbolTable::lookUp(string variable) const {
     for (int i = 0; i < elements.size(); i++)
         if (elements[i].variable == variable)
              return elements[i].value;
 
-    return -1;
+    stringstream ss;
+    ss << variable << " was never defined for this equation"; 
+    throw UnefinedException(ss.str().c_str());
 }
 
 void SymbolTable::clear()

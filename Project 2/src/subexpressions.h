@@ -1,3 +1,6 @@
+#ifndef SUBEXPRESSIONS
+
+#define SUBEXPRESSIONS
 #include "plus.h"
 #include "minus.h"
 #include "multiply.h"
@@ -10,3 +13,5 @@
 #include "invert.h"
 #include "ternary.h"
 #include "quaternary.h"
+
+#endif
