@@ -41,6 +41,8 @@ int main() {
         fin.getline(line, SIZE);
 		if (!fin)
 			break;
+
+		symbolTable.clear();
 		stringstream in(line, ios_base::in); 
 		in >> paren;
 		cout << line << " ";
@@ -51,8 +53,9 @@ int main() {
 			double result = expression->evaluate();
 			cout << "Value = " << result << endl;
 		} catch(const InvalidOperatorException& e) {
-			cout << e.what() << endl;
-			return -1;
+			cout << endl << endl << "**" << e.what() << endl;
+		} catch(const DoubleDefinedException& e) {
+			cout << endl << "** " << e.what() << " Expression aborted" << endl;
     	}
 	}
 
@@ -63,12 +66,16 @@ int main() {
 void parseAssignments(stringstream& in) {
 	char assignop, delimiter;
     string variable;
-    int value;
+    double value;
 
     do {
         variable = parseName(in);
         in >> ws >> assignop >> value >> delimiter;
-        symbolTable.insert(variable, value);
+		try{
+        	symbolTable.insert(variable, value);
+		} catch (DoubleDefinedException e) {
+			throw;
+		}
     } while (delimiter == ',');
 }
    
