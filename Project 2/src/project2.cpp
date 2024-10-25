@@ -18,7 +18,7 @@ using namespace std;
 #include "subexpression.h"
 #include "symboltable.h"
 #include "parse.h"
-#include "invalid_operator.h"
+#include "exceptions.h"
 
 SymbolTable symbolTable;
 
@@ -53,8 +53,10 @@ int main() {
 			double result = expression->evaluate();
 			cout << "Value = " << result << endl;
 		} catch(const InvalidOperatorException& e) {
-			cout << endl << endl << "**" << e.what() << endl;
+			cout << endl << endl << "** " << e.what() << endl;
 		} catch(const DoubleDefinedException& e) {
+			cout << endl << "** " << e.what() << " Expression aborted" << endl;
+    	} catch(const UnefinedException& e) {
 			cout << endl << "** " << e.what() << " Expression aborted" << endl;
     	}
 	}

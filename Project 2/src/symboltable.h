@@ -11,7 +11,7 @@
 #include <sstream>
 using namespace std;
 
-#include "double_defined.h"
+#include "exceptions.h"
 
 class SymbolTable {
 public:
@@ -20,6 +20,7 @@ public:
     double lookUp(string variable) const;
     void clear();
 private:
+    bool hasSymbol(string variable);
     struct Symbol {
         Symbol(string variable, double value) {
             this->variable = variable;
