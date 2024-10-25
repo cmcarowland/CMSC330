@@ -10,6 +10,8 @@
 // it is an indirect subclass of Expression it must implement the evaluate function, which it does
 // by returning the difference of the values of the two subexpressions.
 
+#pragma once
+
 class Minus: public SubExpression {
 public:
     Minus(Expression* left, vector<Expression*> right): SubExpression(left, right) {}

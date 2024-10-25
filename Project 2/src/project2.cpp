@@ -1,11 +1,21 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ *
+ * The entry point of the application.
+ * It reads an input file named "input.txt" containing
+ * statements with expressions and variable assignments. The program parses
+ * each line, evaluates the expressions, and handles exceptions related to
+ * invalid operators, double definitions of variables, and undefined variables.
+ *
+ * The SymbolTable class is used to manage variable assignments. The
+ * `parseAssignments` function reads and stores variable values from the
+ * input stream. The program continues processing lines until the end of the
+ * file, outputting results or error messages as necessary.
+ */
 
-// This file contains the main function for the project 2 skeleton. It reads an input file named input.txt
-// that contains one statement that includes an expression following by a sequence of variable assignments.
-// It parses each statement and then evaluates it.
+
 
 #include <iostream>
 #include <fstream>

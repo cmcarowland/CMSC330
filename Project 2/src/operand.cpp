@@ -8,19 +8,7 @@
 // When the next character is a left parenthesis, a recursive call is made to parse the subexpression.
 // Otherwise the next token is assumed to a variable. No checks are made to ensure correct syntax.
 
-#include <cctype>
-#include <iostream>
-#include <sstream>
-#include <list>
-#include <string>
-using namespace std;
-
-#include "expression.h"
-#include "subexpression.h"
 #include "operand.h"
-#include "variable.h"
-#include "literal.h"
-#include "parse.h"
 
 Expression* Operand::parse(stringstream& in) {
     char paren;

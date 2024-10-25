@@ -1,11 +1,28 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ * 
+ * The SymbolTable class manages a collection of variable symbols and their
+ * associated values, providing methods for insertion, lookup, and checking
+ * for variable existence.
+ * 
+ * - `insert`: Adds a new variable and its value to the table. If the
+ *   variable already exists, a DoubleDefinedException is thrown.
+ * 
+ * - `lookUp`: Retrieves the value of a variable from the table. If the
+ *   variable is not found, it throws an UndefinedException with an error
+ *   message.
+ * 
+ * ADDED METHODS
+ * - `hasSymbol`: Checks if a given variable is already defined in the
+ *   symbol table, returning true if it exists, false otherwise.
+ * 
+ * - `clear`: Empties the symbol table, removing all defined variables.
+ */
 
-// This file contains the class definition of the SymbolTable class. The symbol table is represented
-// with a vector (list) of type Symbol which is a pair consisting of a variable and its associated value.
-// The body of its functions are defined in symboltable.cpp. 
+#pragma once
+
 #include <string>
 #include <vector>
 #include <sstream>

@@ -10,6 +10,8 @@
 // it is an indirect subclass of Expression it must implement the evaluate function, which it does
 // by returning the sum of the values of the two subexpressions.
 
+#pragma once
+
 class Plus: public SubExpression {
 public:
     Plus(Expression* left, vector<Expression*> right): SubExpression(left, right) {}

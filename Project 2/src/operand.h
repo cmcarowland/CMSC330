@@ -6,8 +6,23 @@
 // This file contains the definition of the Operand class, which is a subclass of Expression. It is an
 // abstract class because it does not implement the evaluate function. It contains one static (class)
 // function parse that parses an operand as either a literal or variable.
+#pragma once
+
+#include <cctype>
+#include <iostream>
+#include <sstream>
+#include <list>
+#include <string>
+using namespace std;
+
+#include "expression.h"
+#include "subexpression.h"
+#include "parse.h"
 
 class Operand: public Expression {
 public:
     static Expression* parse(stringstream& in);
 };
+
+#include "literal.h"
+#include "variable.h"

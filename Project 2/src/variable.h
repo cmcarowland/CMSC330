@@ -7,6 +7,16 @@
 // name, which the construcor initializes. Because this class is a subclass of Operand which in turn is 
 // a subclass of Expression, it must implement the function evaluate, whose body is defined in variable.cpp.
 
+#pragma once
+
+#include <string>
+#include <vector>
+using namespace std;
+
+#include "expression.h"
+#include "operand.h"
+#include "symboltable.h"
+
 class Variable: public Operand {
 public:
     Variable(string name) {

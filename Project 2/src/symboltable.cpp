@@ -1,11 +1,25 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
-
-// This file contains the body of the functions contained in The SymbolTable class. The insert function 
-// inserts a new variable symbol and its value into the symbol table and the lookUp function returns
-// that value of the supplied variable symbol name.
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ * 
+ * The SymbolTable class manages a collection of variable symbols and their
+ * associated values, providing methods for insertion, lookup, and checking
+ * for variable existence.
+ * 
+ * - `insert`: Adds a new variable and its value to the table. If the
+ *   variable already exists, a DoubleDefinedException is thrown.
+ * 
+ * - `lookUp`: Retrieves the value of a variable from the table. If the
+ *   variable is not found, it throws an UndefinedException with an error
+ *   message.
+ * 
+ * ADDED METHODS
+ * - `hasSymbol`: Checks if a given variable is already defined in the
+ *   symbol table, returning true if it exists, false otherwise.
+ * 
+ * - `clear`: Empties the symbol table, removing all defined variables.
+ */
 
 #include "symboltable.h"
 

@@ -1,21 +1,21 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
-
-// This file contains the body of the functions contained in The SubExpression class, which includes
-// the constructor that initializes the left and right subexpressions and the static function parse
-// parses the subexpression. Addition and subtraction are the two operators that are implemented.
-
-#include <iostream>
-#include <sstream>
-#include <cmath>
-using namespace std;
-
-#include "invalid_operator.h"
-#include "expression.h"
-#include "subexpression.h"
-#include "operand.h"
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ * 
+ * The SubExpression class serves as a base for expressions that consist of
+ * a left operand and one or more right operands. It provides two constructors
+ * for initializing the left and right expressions.
+ * 
+ * The `parse` method reads an input stream to construct an expression.
+ * It first parses a left operand, then reads an operator followed by a
+ * series of right operands until a closing parenthesis is encountered.
+ * Based on the operator, it creates and returns the appropriate expression
+ * object (e.g., Plus, Minus, Multiply, etc.).
+ * 
+ * If an unsupported operator is encountered, an InvalidOperatorException
+ * is thrown with a relevant error message.
+ */
 
 #include "subexpressions.h"
 

@@ -1,15 +1,16 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
-
-// This file contains the body of the function parseName. That function consumes all alphanumeric 
-// characters until the next whitespace and returns the name that those characters form.
-
-#include <cctype>
-#include <sstream>
-#include <string>
-using namespace std;
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ * 
+ * The parseName function reads from a stringstream to extract a valid
+ * identifier (name) that consists of alphanumeric characters and underscores.
+ * 
+ * It ignores leading whitespace and then constructs the name by appending
+ * characters as long as the next character is alphanumeric or, if the name
+ * has already started, the character is an underscore. The function
+ * returns the constructed name as a string.
+ */
 
 #include "parse.h"
 

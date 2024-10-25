@@ -9,6 +9,9 @@
 // which in turn is a subclass of Expression, it must implement the function evaluate, which returns the
 // value that corresponds to the literal.
 
+#pragma once
+#include "operand.h"
+
 class Literal: public Operand {
 public:
     Literal(double value) {
