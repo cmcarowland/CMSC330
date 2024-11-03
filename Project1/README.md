@@ -1,5 +1,17 @@
 # Project 1
 
+- Add types
+    - Text
+    - SolidPolygon
+    - IsoscelesTriangle
+    - Parallelogram
+    - RegularPolygon
+- Add new terms to lexer
+- Build tests for each new item
+- Implement drawing
+- Test scenes manually
+- Complete PDF
+
 ```
 scene → SCENE IDENTIFIER number_list images END '.'
 images → image images | image
