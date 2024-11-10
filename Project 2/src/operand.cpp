@@ -15,7 +15,7 @@ Expression* Operand::parse(stringstream& in) {
     double value;
 
     in >> ws;
-    if (isdigit(in.peek())) {
+    if (isdigit(in.peek()) || in.peek() == '-') {
         in >> value;
         Expression* literal = new Literal(value);
         return literal;
