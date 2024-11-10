@@ -1,7 +1,14 @@
-.PHONY : all clean
+.PHONY : all clean test project2
+CXXFLAGS += -I/usr/local/include
+LDFLAGS += -L/usr/local/lib
 
-all: 
-	g++ src/*.cpp -g -o bin/project2.exe
+all: clean test project2
+
+test:
+	clang++ -std=c++17 -pthread test/project2Tests.cpp `ls src/*.cpp | grep -v project2.cpp` $(CXXFLAGS) $(LDFLAGS) /usr/local/lib/libgtest.a /usr/local/lib/libgtest_main.a  -o bin/tests
+	
+project2:
+	clang++ src/*.cpp -g -o bin/project2.exe
 
 clean:
-	rm bin/*.exe
+	rm -f bin/*.exe
