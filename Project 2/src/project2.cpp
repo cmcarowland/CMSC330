@@ -32,8 +32,6 @@ using namespace std;
 
 SymbolTable symbolTable;
 
-void parseAssignments(stringstream& in);
-
 int main() {
 	const int SIZE = 256;
 	Expression* expression;
@@ -74,20 +72,3 @@ int main() {
 	system("pause");
 	return 0;
 }
-
-void parseAssignments(stringstream& in) {
-	char assignop, delimiter;
-    string variable;
-    double value;
-
-    do {
-        variable = parseName(in);
-        in >> ws >> assignop >> value >> delimiter;
-		try{
-        	symbolTable.insert(variable, value);
-		} catch (DoubleDefinedException e) {
-			throw;
-		}
-    } while (delimiter == ',');
-}
-   
