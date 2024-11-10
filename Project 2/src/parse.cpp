@@ -10,9 +10,16 @@
  * characters as long as the next character is alphanumeric or, if the name
  * has already started, the character is an underscore. The function
  * returns the constructed name as a string.
+ *
+ * The parseAssignments function processes a stringstream to read and handle
+ * a series of assignments. It ensures that each assignment follows proper
+ * syntax rules and interacts with the symbol table as necessary. This function
+ * is used for parsing assignment expressions and updating symbols accordingly.
  */
 
 #include "parse.h"
+
+extern SymbolTable symbolTable;
 
 string parseName(stringstream& in) {
     char alnum;
@@ -24,4 +31,20 @@ string parseName(stringstream& in) {
         name += alnum;
     }
     return name;
+}
+
+void parseAssignments(stringstream& in) {
+	char assignop, delimiter;
+    string variable;
+    double value;
+
+    do {
+        variable = parseName(in);
+        in >> ws >> assignop >> value >> delimiter;
+		try{
+        	symbolTable.insert(variable, value);
+		} catch (DoubleDefinedException e) {
+			throw;
+		}
+    } while (delimiter == ',');
 }
