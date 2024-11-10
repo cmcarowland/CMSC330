@@ -1,13 +1,19 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
-
-// This file contains the definition of the Literal class, whose representation consists of the value
-// of the literal. Because both of its functions are one line functions, they are implemented as inline 
-// functions. The constructor saves the value of the literal. Because this class is a subclass of Operand
-// which in turn is a subclass of Expression, it must implement the function evaluate, which returns the
-// value that corresponds to the literal.
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ *
+ * The Literal class inherits from the Operand class and represents a literal numeric value.
+ * 
+ * This class is used to encapsulate and evaluate a specific numeric value.
+ * 
+ * Public methods:
+ * - Constructor: Takes a double value and initializes the member variable.
+ * - evaluate: Returns the stored numeric value.
+ * 
+ * Private members:
+ * - value: A double that holds the numeric value represented by this literal.
+ */
 
 #pragma once
 #include "operand.h"

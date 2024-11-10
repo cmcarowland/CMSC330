@@ -1,3 +1,23 @@
+/**
+ * Raymond Rowland
+ * 10 NOV 24
+ * Project 2
+ * 
+ * This code defines a set of unit tests for parsing and evaluating mathematical expressions
+ * using the Google Test framework. It tests various operations such as addition, division,
+ * minimum/maximum functions, average, and custom operators, as well as parsing literals and variables.
+ * 
+ * The `EquationTest` class is used as a fixture for setting up expression parsing and evaluation.
+ * It includes tests for verifying the correctness of expressions with literals and variables.
+ * The tests also cover complex scenarios like ternary and quaternary operations.
+ * 
+ * Additionally, the code includes exception handling tests to ensure that:
+ * - `DoubleDefinedException` is raised when a variable is redefined.
+ * - `InvalidOperatorException` is raised for unsupported operators.
+ * - `UnefinedException` is raised when an undefined variable is encountered.
+ */
+
+
 #include "gtest/gtest.h"
 #include "../src/expression.h"
 #include "../src/subexpression.h"
