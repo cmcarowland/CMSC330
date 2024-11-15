@@ -24,6 +24,6 @@ public:
     
     double evaluate() {
         double result = left->evaluate();
-        return result == 0 ? right[0]->evaluate() : right[1]->evaluate();
+        return result != 0 ? right[0]->evaluate() : right[1]->evaluate();
     }
 };

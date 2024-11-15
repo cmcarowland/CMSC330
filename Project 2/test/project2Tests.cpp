@@ -45,6 +45,20 @@ namespace {
         Expression* expression;
     };
 
+    TEST_F(EquationTest, InvertVars) { 
+        string s = "(d ~), d=25;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(-25, result) << "Failed!! " << s;
+    }
+
+    TEST_F(EquationTest, InvertLiteral) { 
+        string s = "((50 + q_z) ~), q_z = 150;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(-200, result) << "Failed!! " << s; 
+    }
+
     TEST_F(EquationTest, AddVars) { 
         string s = "( a + z ) , a = 3, z = 4.9;";
         SetUp(s);
@@ -58,18 +72,33 @@ namespace {
         double result = expression->evaluate();
         EXPECT_EQ(100 + 27, result) << "Failed!! " << s; 
     }
-    
-    TEST_F(EquationTest, AvgVars) { 
-        SetUp("(100 & h), h = 90;");
-        double result = expression->evaluate();
-        EXPECT_EQ(95, result) << "Failed!!"; 
-    }
-
-    TEST_F(EquationTest, AvgLiteral) { 
-        string s = "(q_z & 50), q_z = 150;";
+   
+    TEST_F(EquationTest, SubVars) { 
+        string s = "( a - z ) , a = 10, z = 2.9;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(100, result) << "Failed!! " << s; 
+        EXPECT_EQ(10 - 2.9, result) << "Failed!! " << s; 
+    }
+   
+    TEST_F(EquationTest, SubLiteral) { 
+        string s = "( a - 512 ) , a = 1024;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(1024 - 512, result) << "Failed!! " << s; 
+    }
+   
+    TEST_F(EquationTest, MulVars) { 
+        string s = "( a * z ) , a = 10, z = 2.9;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(10 * 2.9, result) << "Failed!! " << s; 
+    }
+   
+    TEST_F(EquationTest, MulLiteral) { 
+        string s = "( a * 512 ) , a = 4;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(4 * 512, result) << "Failed!! " << s; 
     }
     
     TEST_F(EquationTest, DivVars) { 
@@ -86,21 +115,21 @@ namespace {
         EXPECT_EQ(3, result) << "Failed!! " << s; 
     }
     
-    TEST_F(EquationTest, InvertVars) { 
-        string s = "(d ~), d=25;";
+    TEST_F(EquationTest, RemVars) { 
+        string s = "(c_ % h), c_=118, h = 8;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(-25, result) << "Failed!! " << s;
+        EXPECT_EQ(6, result) << "Failed!! " << s;
     }
 
-    TEST_F(EquationTest, InvertLiteral) { 
-        string s = "((50 + q_z) ~), q_z = 150;";
+    TEST_F(EquationTest, RemLiteral) { 
+        string s = "(q_z % 3), q_z = 20;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(-200, result) << "Failed!! " << s; 
+        EXPECT_EQ(2, result) << "Failed!! " << s; 
     }
-    
-    TEST_F(EquationTest, ExponentVars) { 
+
+     TEST_F(EquationTest, ExponentVars) { 
         string s = "(f ^ e), e=16, f=2;";
         SetUp(s);
         double result = expression->evaluate();
@@ -113,7 +142,7 @@ namespace {
         double result = expression->evaluate();
         EXPECT_EQ(16, result) << "Failed!! " << s; 
     }
-   
+
     TEST_F(EquationTest, MinVars) { 
         string s = "(h < i), h=100, i=200;";
         SetUp(s);
@@ -142,18 +171,45 @@ namespace {
         EXPECT_EQ(4, result) << "Failed!! " << s; 
     }
 
+    TEST_F(EquationTest, AvgVars) { 
+        SetUp("(100 & h), h = 90;");
+        double result = expression->evaluate();
+        EXPECT_EQ(95, result) << "Failed!!"; 
+    }
+
+    TEST_F(EquationTest, AvgLiteral) { 
+        string s = "(q_z & 50), q_z = 150;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(100, result) << "Failed!! " << s; 
+    }
+    
     TEST_F(EquationTest, TernaryVars) { 
         string s = "(m ? k l), k=34, l=926, m=0;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(34, result) << "Failed!! " << s;
+        EXPECT_EQ(926, result) << "Failed!! " << s;
     }
 
     TEST_F(EquationTest, TernaryLiteral) { 
-        string s = "( n ? 0 -1 ), n = 4;";
+        string s = "( n ? 0 -1 ), n = 1;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(-1, result) << "Failed!! " << s; 
+        EXPECT_EQ(0, result) << "Failed!! " << s; 
+    }
+    
+    TEST_F(EquationTest, TernaryExpressions) { 
+        string s = "((5 - 4) ? (f * e) (f + e)), f = 2, e = 4;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(8, result) << "Failed!! " << s; 
+    }
+    
+    TEST_F(EquationTest, TernaryExpressions0) { 
+        string s = "((5 - 5) ? (f * e) (f + e)), f = 2, e = 4;";
+        SetUp(s);
+        double result = expression->evaluate();
+        EXPECT_EQ(6, result) << "Failed!! " << s; 
     }
 
     TEST_F(EquationTest, QuatnaryVarsLeft) { 
