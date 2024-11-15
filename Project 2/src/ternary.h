@@ -10,9 +10,9 @@
  * `evaluate` method evaluates the left expression and returns the result
  * of one of the right expressions based on the value of the left
  * expression:
- * - If the result is zero, it evaluates and returns the first right
+ * - If the result is non-zero, it evaluates and returns the first right
  *   expression.
- * - If the result is non-zero, it evaluates and returns the second right
+ * - If the result is zero, it evaluates and returns the second right
  *   expression.
  */
 
