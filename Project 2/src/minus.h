@@ -1,14 +1,18 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ * 
+ * Added header guard and modified right to be a vector of expressions
+ * 
+ * This code defines a `Minus` class that inherits from the `SubExpression` class. 
+ * The constructor takes a left-hand side `Expression` pointer and a vector of right-hand side `Expression` pointers, 
+ * which are passed to the base class `SubExpression` constructor.
+ * The `evaluate()` function implements the subtraction operation, 
+ * returning the result of subtracting the evaluation of the first element in the `right` vector 
+ * from the evaluation of the `left` expression.
+ */
 
-// This file contains the class definition of the Minus class, which is a subclass of SubExpression,
-// which in turn is a subclass of the Expression. Because both of its functions are one line functions, 
-// they are implemented as inline functions. Its constructor initializes the left and right subexpressions
-// it inherits from SubExpression by calling the constructor of the SubExpression class. Because
-// it is an indirect subclass of Expression it must implement the evaluate function, which it does
-// by returning the difference of the values of the two subexpressions.
 
 #pragma once
 

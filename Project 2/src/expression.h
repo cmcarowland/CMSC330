@@ -1,10 +1,13 @@
-// CMSC 330 Advanced Programming Languages
-// Project 2 Skeleton
-// UMGC CITE
-// Spring 2023
-
-// This file contains the definition of the Expression class, which is an abstract class that contains one
-// abstract (pure virtual) function named evaluate, which must be implemented by all its subclasses.
+/*
+ * Raymond Rowland
+ * 25 OCT 24
+ * Project 2
+ *
+ * This code defines an abstract base class named `Expression`. 
+ * It declares a pure virtual function `evaluate()`, which must be implemented by any derived class. 
+ * The `evaluate()` function is expected to return a `double` value, 
+ * likely representing the result of evaluating the expression.
+ */
 
 #pragma once
 

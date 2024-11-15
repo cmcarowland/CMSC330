@@ -3,6 +3,8 @@
  * 25 OCT 24
  * Project 2
  * 
+ * Added Pragma once header guard
+ * 
  * The Avg class extends the SubExpression class to implement the
  * calculation of an average based on the evaluation of a left expression
  * and the first right expression.
