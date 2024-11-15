@@ -66,7 +66,11 @@ int main() {
 			cout << endl << "** " << e.what() << " Expression aborted" << endl;
     	} catch(const UnefinedException& e) {
 			cout << endl << "** " << e.what() << " Expression aborted" << endl;
+    	} catch(const InvalidNameException& e) {
+			cout << endl << "** " << e.what() << endl;
     	}
+
+		cout << endl;
 	}
 
 	system("pause");

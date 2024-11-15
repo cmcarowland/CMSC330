@@ -265,29 +265,81 @@ namespace {
         }, InvalidOperatorException );
     }
  
-    TEST(Exception, UnefinedException )
+    TEST(Exception, InvalidNameExceptionLeft )
     {
         char comma, paren;
         symbolTable.clear();
 
-        string s = "( a + b ) , a = 3, c = 4.9;";
+        string s = "( _a + b ) , _a = 3, b = 4.9;";
         stringstream in(s);
-        in >> paren;
-        Expression* expression = SubExpression::parse(in);
-        in >> comma;        
 
         EXPECT_THROW({
             try
             {
+                in >> paren;
+                Expression* expression = SubExpression::parse(in);
+                in >> comma;        
                 parseAssignments(in);
                 double result = expression->evaluate();
                 EXPECT_EQ(3 + 4.9, result) << "Failed!! " << s; 
             }
-            catch( const UnefinedException& e )
+            catch( const InvalidNameException& e )
             {
-                EXPECT_STREQ( "b was never defined for this equation", e.what() );
+                EXPECT_STREQ( "Name cannot start with an underscore!", e.what() );
                 throw;
             }
-        }, UnefinedException );
+        }, InvalidNameException );
+    }
+
+    TEST(Exception, InvalidNameExceptionRight )
+    {
+        char comma, paren;
+        symbolTable.clear();
+
+        string s = "( a + _b ) , a = 3, _b = 4.9;";
+        stringstream in(s);
+
+        EXPECT_THROW({
+            try
+            {
+                in >> paren;
+                Expression* expression = SubExpression::parse(in);
+                in >> comma;        
+                parseAssignments(in);
+                double result = expression->evaluate();
+                EXPECT_EQ(3 + 4.9, result) << "Failed!! " << s; 
+            }
+            catch( const InvalidNameException& e )
+            {
+                EXPECT_STREQ( "Name cannot start with an underscore!", e.what() );
+                throw;
+            }
+        }, InvalidNameException );
+    }
+    
+    TEST(Exception, InvalidNameExceptionBoth )
+    {
+        char comma, paren;
+        symbolTable.clear();
+
+        string s = "( _a + _b ) , _a = 3, _b = 4.9;";
+        stringstream in(s);
+
+        EXPECT_THROW({
+            try
+            {
+                in >> paren;
+                Expression* expression = SubExpression::parse(in);
+                in >> comma;        
+                parseAssignments(in);
+                double result = expression->evaluate();
+                EXPECT_EQ(3 + 4.9, result) << "Failed!! " << s; 
+            }
+            catch( const InvalidNameException& e )
+            {
+                EXPECT_STREQ( "Name cannot start with an underscore!", e.what() );
+                throw;
+            }
+        }, InvalidNameException );
     }
 }

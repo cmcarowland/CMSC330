@@ -1,6 +1,6 @@
 .PHONY : all clean test project2
-CXXFLAGS += -I/usr/local/include
-LDFLAGS += -L/usr/local/lib
+CXXFLAGS += -I./test/include
+LDFLAGS += -L./test/lib
 
 all: clean test project2
 

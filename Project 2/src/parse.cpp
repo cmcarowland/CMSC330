@@ -26,10 +26,13 @@ string parseName(stringstream& in) {
     string name = "";
 
     in >> ws;
-    while (isalnum(in.peek()) || (name.length() > 0 && in.peek() == '_')) {
+    while (isalnum(in.peek()) || in.peek() == '_') {
         in >> alnum;
         name += alnum;
     }
+    if(name[0] == '_')
+        throw InvalidNameException("Name cannot start with an underscore!");
+        
     return name;
 }
 
@@ -45,6 +48,6 @@ void parseAssignments(stringstream& in) {
         	symbolTable.insert(variable, value);
 		} catch (DoubleDefinedException e) {
 			throw;
-		}
+        }
     } while (delimiter == ',');
 }
