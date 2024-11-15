@@ -26,6 +26,12 @@
 #include "../src/exceptions.h"
 #include "../src/variable.h"
 
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string LIGHT_BLUE = "\033[94m";
+const string RESET = "\033[0m";
+
 SymbolTable symbolTable;
 
 namespace {
@@ -45,11 +51,18 @@ namespace {
         Expression* expression;
     };
 
+    string result_header(string equation, double result) {
+        stringstream ss;
+        ss << LIGHT_BLUE << "[  RESULT  ]\t" << equation << " = " << result << RESET << endl;
+        return ss.str();
+    }
+
     TEST_F(EquationTest, InvertVars) { 
         string s = "(d ~), d=25;";
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(-25, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, InvertLiteral) { 
@@ -57,41 +70,47 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(-200, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, AddVars) { 
         string s = "( a + z ) , a = 3, z = 4.9;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(3 + 4.9, result) << "Failed!! " << s; 
+        EXPECT_EQ(3 + 4.9, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
    
     TEST_F(EquationTest, AddLiteral) { 
         string s = "( a + 100 ) , a = 27;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(100 + 27, result) << "Failed!! " << s; 
+        EXPECT_EQ(100 + 27, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
    
     TEST_F(EquationTest, SubVars) { 
         string s = "( a - z ) , a = 10, z = 2.9;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(10 - 2.9, result) << "Failed!! " << s; 
+        EXPECT_EQ(10 - 2.9, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
    
     TEST_F(EquationTest, SubLiteral) { 
         string s = "( a - 512 ) , a = 1024;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(1024 - 512, result) << "Failed!! " << s; 
+        EXPECT_EQ(1024 - 512, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
    
     TEST_F(EquationTest, MulVars) { 
         string s = "( a * z ) , a = 10, z = 2.9;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(10 * 2.9, result) << "Failed!! " << s; 
+        EXPECT_EQ(10 * 2.9, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
    
     TEST_F(EquationTest, MulLiteral) { 
@@ -99,6 +118,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(4 * 512, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
     
     TEST_F(EquationTest, DivVars) { 
@@ -106,6 +126,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(50, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, DivLiteral) { 
@@ -113,6 +134,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(3, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
     
     TEST_F(EquationTest, RemVars) { 
@@ -120,6 +142,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(6, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, RemLiteral) { 
@@ -127,6 +150,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(2, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
      TEST_F(EquationTest, ExponentVars) { 
@@ -134,6 +158,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(65536, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, ExponentLiteral) { 
@@ -141,6 +166,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(16, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, MinVars) { 
@@ -148,6 +174,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(100, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, MinLiteral) { 
@@ -155,6 +182,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(2, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, MaxVars) { 
@@ -162,6 +190,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(200, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, MaxLiteral) { 
@@ -169,19 +198,23 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(4, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, AvgVars) { 
-        SetUp("(100 & h), h = 90;");
+        string s = "(100 & h), h = 90;";
+        SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(95, result) << "Failed!!"; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, AvgLiteral) { 
         string s = "(q_z & 50), q_z = 150;";
         SetUp(s);
         double result = expression->evaluate();
-        EXPECT_EQ(100, result) << "Failed!! " << s; 
+        EXPECT_EQ(100, result) << "Failed!! " << s;
+        cout << result_header(s, result); 
     }
     
     TEST_F(EquationTest, TernaryVars) { 
@@ -189,6 +222,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(926, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, TernaryLiteral) { 
@@ -196,6 +230,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(0, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
     
     TEST_F(EquationTest, TernaryExpressions) { 
@@ -203,6 +238,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(8, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
     
     TEST_F(EquationTest, TernaryExpressions0) { 
@@ -210,6 +246,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(6, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, QuatnaryVarsLeft) { 
@@ -217,6 +254,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(123, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
     
     TEST_F(EquationTest, QuatnaryVarsCenter) { 
@@ -224,6 +262,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(34, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
     
     TEST_F(EquationTest, QuatnaryVarsRight) { 
@@ -231,6 +270,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(926, result) << "Failed!! " << s;
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, QuatnaryLiteralLeft) { 
@@ -238,6 +278,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(-1, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, QuatnaryLiteralCenter) { 
@@ -245,6 +286,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(4, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, QuatnaryLiteralRight) { 
@@ -252,6 +294,7 @@ namespace {
         SetUp(s);
         double result = expression->evaluate();
         EXPECT_EQ(1, result) << "Failed!! " << s; 
+        cout << result_header(s, result);
     }
 
     TEST_F(EquationTest, Cleared)
@@ -261,11 +304,14 @@ namespace {
             SetUp(s);
             double result = expression->evaluate();
             EXPECT_EQ(3 + 4.9, result) << "Failed!! " << s; 
+            cout << result_header(s, result);
 
             s = "(a # b c d), a = 0, b=-1,c=4,d=34;";
             SetUp(s);
             result = expression->evaluate();
             EXPECT_EQ(4, result) << "Failed!! " << s; 
+            cout << result_header(s, result);
+            cout << LIGHT_BLUE << "[  RESULT  ]\t" << GREEN << "Variables 'a' and 'b' were defined in repeating equations and they did not raise a double defined exception" << RESET << endl;
         } catch (const DoubleDefinedException& e) {
             EXPECT_STREQ( "a Was previously defined", e.what() );
         }
@@ -291,6 +337,7 @@ namespace {
             catch( const DoubleDefinedException& e )
             {
                 EXPECT_STREQ( "a Was previously defined", e.what() );
+                cout << LIGHT_BLUE << "[  RESULT  ]\t" << RED << "Double defined exception was caught" << RESET << endl;
                 throw;
             }
         }, DoubleDefinedException );
@@ -316,6 +363,7 @@ namespace {
             catch( const InvalidOperatorException& e )
             {
                 EXPECT_STREQ( "$ is not supported yet", e.what() );
+                cout << LIGHT_BLUE << "[  RESULT  ]\t" << RED << "InvalidOperationException was caught" << RESET << endl;
                 throw;
             }
         }, InvalidOperatorException );
@@ -342,6 +390,7 @@ namespace {
             catch( const InvalidNameException& e )
             {
                 EXPECT_STREQ( "Name cannot start with an underscore!", e.what() );
+                cout << LIGHT_BLUE << "[  RESULT  ]\t" << RED << "InvalidNameException was caught" << RESET << endl;
                 throw;
             }
         }, InvalidNameException );
@@ -368,6 +417,7 @@ namespace {
             catch( const InvalidNameException& e )
             {
                 EXPECT_STREQ( "Name cannot start with an underscore!", e.what() );
+                cout << LIGHT_BLUE << "[  RESULT  ]\t" << RED << "InvalidNameException was caught" << RESET << endl;
                 throw;
             }
         }, InvalidNameException );
@@ -394,6 +444,7 @@ namespace {
             catch( const InvalidNameException& e )
             {
                 EXPECT_STREQ( "Name cannot start with an underscore!", e.what() );
+                cout << LIGHT_BLUE << "[  RESULT  ]\t" << RED << "InvalidNameException was caught" << RESET << RESET << endl;
                 throw;
             }
         }, InvalidNameException );
