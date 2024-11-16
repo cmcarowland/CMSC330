@@ -11,4 +11,4 @@ project2:
 	clang++ src/*.cpp -g -o bin/project2.exe
 
 clean:
-	rm -f bin/*.exe
+	rm -f bin/*
